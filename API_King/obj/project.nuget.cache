@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "omTayI2Z+iLGl1p1dJrEM72wr5KM1HgsuRXbAkOHXb7PsqVMQ4EFS2hPn2OoyExXZueRKWNNBo93feyuJ4Yvhg==",
+  "dgSpecHash": "Jwu/LXHF8yYmwBLt7Ecg0dg2XtGcgsm81bTFFGKyUaWcfZ4R0PlErWFOSFOrsAmMGBGJF4c70Z4edluIn2rQ+Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\King\\Desktop\\Development\\Projects .Net\\Projet6-Udemy\\API\\API_King\\API_King.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\King\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\King\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\King\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\King\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
     "C:\\Users\\King\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
