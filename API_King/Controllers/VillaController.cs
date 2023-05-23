@@ -1,13 +1,9 @@
-﻿using API_King.Datos;
-using API_King.Modelos;
+﻿using API_King.Modelos;
 using API_King.Modelos.Dto;
 using API_King.Repositorio.IRepositorio;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Net;
 
 namespace API_King.Controllers
@@ -173,7 +169,7 @@ namespace API_King.Controllers
         }
 
         [HttpPut("{id:int}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
         public async Task<IActionResult> UpdateVilla(int id, [FromBody] VillaUpdateDto updateDto)
@@ -181,8 +177,8 @@ namespace API_King.Controllers
             if (updateDto == null || id != updateDto.Id)
             {
                 _response.IsExitoso = false;
-
-                return BadRequest();
+                _response.statusCode = HttpStatusCode.BadRequest;
+                return BadRequest(_response);
             }
             
             Villa modelo = _mapper.Map<Villa>(updateDto);            
@@ -192,7 +188,7 @@ namespace API_King.Controllers
         }
 
         [HttpPatch("{id:int}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
         public async Task<IActionResult> UpdatePartialVilla(int id, JsonPatchDocument<VillaUpdateDto> patchDto)
@@ -215,8 +211,7 @@ namespace API_King.Controllers
                 return BadRequest(ModelState);
             }
 
-            Villa modelo = _mapper.Map<Villa>(villaDto);
-            
+            Villa modelo = _mapper.Map<Villa>(villaDto);            
             await _villaRepo.Actualizar(modelo);
             _response.statusCode = HttpStatusCode.NoContent;
             return Ok(_response);

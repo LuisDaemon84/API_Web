@@ -39,8 +39,8 @@ namespace API_King.Controllers
             try
             {
                 _logger.LogInformation("Obtener número de villas");
-                IEnumerable<NumeroVilla> numerovillaList = await _numeroRepo.ObtenerTodos();
-                _response.Restultado = _mapper.Map<IEnumerable<NumeroVillaDto>>(numerovillaList);
+                IEnumerable<NumeroVilla> numeroVillaList = await _numeroRepo.ObtenerTodos();
+                _response.Restultado = _mapper.Map<IEnumerable<NumeroVillaDto>>(numeroVillaList);
                 _response.statusCode = HttpStatusCode.OK;
 
                 return Ok(_response);
