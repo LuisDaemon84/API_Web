@@ -1,7 +1,6 @@
 ﻿using API_King.Modelos;
 using API_King.Modelos.Dto;
 using AutoMapper;
-using System.Runtime.InteropServices;
 
 namespace API_King
 {

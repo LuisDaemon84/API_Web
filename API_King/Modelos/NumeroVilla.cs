@@ -16,6 +16,5 @@ namespace API_King.Modelos
         public DateTime FechaCreacion { get; set; }
         public DateTime FechaActualizacion { get; set; }
 
-
     }
 }

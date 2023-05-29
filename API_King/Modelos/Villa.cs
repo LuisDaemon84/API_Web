@@ -8,6 +8,7 @@ namespace API_King.Modelos
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        [Required]
         public string Nombre { get; set; }
         public string Detalle { get; set; }
 

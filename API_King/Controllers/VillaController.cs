@@ -71,7 +71,7 @@ namespace API_King.Controllers
                 {
                     _response.statusCode = HttpStatusCode.NotFound;
                     _response.IsExitoso = false;
-                    return NotFound();
+                    return NotFound(_response);
                 }
 
                 _response.Restultado = _mapper.Map<VillaDto>(villa);

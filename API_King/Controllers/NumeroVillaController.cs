@@ -1,13 +1,8 @@
-﻿using API_King.Datos;
-using API_King.Modelos;
+﻿using API_King.Modelos;
 using API_King.Modelos.Dto;
 using API_King.Repositorio.IRepositorio;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Net;
 
 namespace API_King.Controllers
@@ -78,7 +73,7 @@ namespace API_King.Controllers
                 {
                     _response.statusCode = HttpStatusCode.NotFound;
                     _response.IsExitoso = false;
-                    return NotFound();
+                    return NotFound(_response);
                 }
 
                 _response.Restultado = _mapper.Map<NumeroVillaDto>(numeroVilla);
@@ -111,13 +106,13 @@ namespace API_King.Controllers
                 //validar si los nombres ya existen
                 if (await _numeroRepo.Obtener(v => v.VillaNo == createDto.VillaNo) != null)
                 {
-                    ModelState.AddModelError("NombreExiste", "El número de villa ya existe");
+                    ModelState.AddModelError("ErrorMessages", "El número de villa ya existe");
                     return BadRequest(ModelState);
                 }
 
                 if(await _villaRepo.Obtener(v=> v.Id==createDto.VillaId) ==null)
                 {
-                    ModelState.AddModelError("Claveforanea", "El Id de la villa no existe");
+                    ModelState.AddModelError("ErrorMessages", "El Id de la villa no existe");
                     return BadRequest(ModelState);
                 }
 
@@ -182,7 +177,7 @@ namespace API_King.Controllers
         }
 
         [HttpPut("{id:int}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
         public async Task<IActionResult> UpdateNumeroVilla(int id, [FromBody] NumeroVillaUpdateDto updateDto)
@@ -196,7 +191,7 @@ namespace API_King.Controllers
             
             if(await _villaRepo.Obtener(V=> V.Id == updateDto.VillaId) == null)
             {
-                ModelState.AddModelError("ClaveForanea", "El Id de la villa no existe");
+                ModelState.AddModelError("ErrorMessages", "El Id de la villa no existe");
                 return BadRequest(ModelState);
             }
 
