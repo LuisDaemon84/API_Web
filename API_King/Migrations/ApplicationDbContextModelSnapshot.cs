@@ -28,7 +28,6 @@ namespace API_King.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("DetalleEspecial")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("FechaActualizacion")
@@ -56,11 +55,9 @@ namespace API_King.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Amenidad")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Detalle")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("FechaActualizacion")
@@ -70,7 +67,6 @@ namespace API_King.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ImagenUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("MetrosCuadrados")
@@ -96,8 +92,8 @@ namespace API_King.Migrations
                             Id = 1,
                             Amenidad = "",
                             Detalle = "Detalle de la villa",
-                            FechaActualizacion = new DateTime(2023, 5, 9, 22, 38, 43, 318, DateTimeKind.Local).AddTicks(2112),
-                            FechaCreacion = new DateTime(2023, 5, 9, 22, 38, 43, 318, DateTimeKind.Local).AddTicks(2078),
+                            FechaActualizacion = new DateTime(2023, 5, 29, 21, 8, 14, 945, DateTimeKind.Local).AddTicks(4724),
+                            FechaCreacion = new DateTime(2023, 5, 29, 21, 8, 14, 945, DateTimeKind.Local).AddTicks(4695),
                             ImagenUrl = "",
                             MetrosCuadrados = 50,
                             Nombre = "Villa Real",
@@ -109,8 +105,8 @@ namespace API_King.Migrations
                             Id = 2,
                             Amenidad = "",
                             Detalle = "Villa Premiun",
-                            FechaActualizacion = new DateTime(2023, 5, 9, 22, 38, 43, 318, DateTimeKind.Local).AddTicks(2234),
-                            FechaCreacion = new DateTime(2023, 5, 9, 22, 38, 43, 318, DateTimeKind.Local).AddTicks(2224),
+                            FechaActualizacion = new DateTime(2023, 5, 29, 21, 8, 14, 945, DateTimeKind.Local).AddTicks(4744),
+                            FechaCreacion = new DateTime(2023, 5, 29, 21, 8, 14, 945, DateTimeKind.Local).AddTicks(4734),
                             ImagenUrl = "",
                             MetrosCuadrados = 60,
                             Nombre = "Villa Live",

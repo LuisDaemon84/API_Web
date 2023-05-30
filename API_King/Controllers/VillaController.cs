@@ -33,7 +33,7 @@ namespace API_King.Controllers
             {
                 _logger.LogInformation("Obtener todas las villas");
                 IEnumerable<Villa> villaList = await _villaRepo.ObtenerTodos();
-                _response.Restultado = _mapper.Map<IEnumerable<VillaDto>>(villaList);
+                _response.Resultado = _mapper.Map<IEnumerable<VillaDto>>(villaList);
                 _response.statusCode = HttpStatusCode.OK;
 
                 return Ok(_response);
@@ -48,7 +48,7 @@ namespace API_King.Controllers
             
         }
 
-        [HttpGet("id:int", Name = "GetVilla")]
+        [HttpGet("{id:int}", Name = "GetVilla")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -74,7 +74,7 @@ namespace API_King.Controllers
                     return NotFound(_response);
                 }
 
-                _response.Restultado = _mapper.Map<VillaDto>(villa);
+                _response.Resultado = _mapper.Map<VillaDto>(villa);
                 _response.statusCode = HttpStatusCode.OK;
                 return Ok(_response);
             }
@@ -117,7 +117,7 @@ namespace API_King.Controllers
                 modelo.FechaCreacion = DateTime.Now;
                 modelo.FechaActualizacion = DateTime.Now;
                 await _villaRepo.Crear(modelo);
-                _response.Restultado = modelo;
+                _response.Resultado = modelo;
                 _response.statusCode = HttpStatusCode.Created;
                 return CreatedAtRoute("GetVilla", new { id = modelo.Id }, _response);
             }

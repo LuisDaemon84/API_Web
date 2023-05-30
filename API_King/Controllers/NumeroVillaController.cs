@@ -35,7 +35,7 @@ namespace API_King.Controllers
             {
                 _logger.LogInformation("Obtener número de villas");
                 IEnumerable<NumeroVilla> numeroVillaList = await _numeroRepo.ObtenerTodos();
-                _response.Restultado = _mapper.Map<IEnumerable<NumeroVillaDto>>(numeroVillaList);
+                _response.Resultado = _mapper.Map<IEnumerable<NumeroVillaDto>>(numeroVillaList);
                 _response.statusCode = HttpStatusCode.OK;
 
                 return Ok(_response);
@@ -50,7 +50,7 @@ namespace API_King.Controllers
             
         }
 
-        [HttpGet("id:int", Name = "GetNumeroVilla")]
+        [HttpGet("{id:int}", Name = "GetNumeroVilla")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -76,7 +76,7 @@ namespace API_King.Controllers
                     return NotFound(_response);
                 }
 
-                _response.Restultado = _mapper.Map<NumeroVillaDto>(numeroVilla);
+                _response.Resultado = _mapper.Map<NumeroVillaDto>(numeroVilla);
                 _response.statusCode = HttpStatusCode.OK;
                 return Ok(_response);
             }
@@ -125,7 +125,7 @@ namespace API_King.Controllers
                 modelo.FechaCreacion = DateTime.Now;
                 modelo.FechaActualizacion = DateTime.Now;
                 await _numeroRepo.Crear(modelo);
-                _response.Restultado = modelo;
+                _response.Resultado = modelo;
                 _response.statusCode = HttpStatusCode.Created;
                 return CreatedAtRoute("GetNumeroVilla", new { id = modelo.VillaNo }, _response);
             }
