@@ -3,7 +3,9 @@ using API_King_Utilidad;
 using API_King_Web.Models;
 using API_King_Web.Services.IServices;
 using Newtonsoft.Json;
+using System.Net;
 using System.Text;
+
 
 namespace API_King_Web.Services
 {
@@ -54,9 +56,31 @@ namespace API_King_Web.Services
                 HttpResponseMessage apiResponse = null;
                 apiResponse = await client.SendAsync(message);
                 var apiContent = await apiResponse.Content.ReadAsStringAsync();
-                var APIResponse = JsonConvert.DeserializeObject<T>(apiContent);
-                return APIResponse;
 
+                try
+                {
+                    APIResponse response = JsonConvert.DeserializeObject<APIResponse>(apiContent);
+
+                    if (apiResponse.StatusCode == HttpStatusCode.BadRequest || apiResponse.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        response.statusCode = HttpStatusCode.BadRequest;
+                        response.IsExitoso = false;
+                        var res = JsonConvert.SerializeObject(response);
+                        var obj = JsonConvert.DeserializeObject<T>(res);
+
+                        return obj;
+                    }
+
+                    var APIResponse = JsonConvert.DeserializeObject<T>(apiContent);
+                    return APIResponse;
+
+                }
+                catch (Exception ex)
+                {
+                    var errorResponse = JsonConvert.DeserializeObject<T>(apiContent);
+                    return errorResponse;
+                }
+              
             }
             catch (Exception ex)
             {

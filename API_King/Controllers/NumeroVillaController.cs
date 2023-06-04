@@ -34,7 +34,7 @@ namespace API_King.Controllers
             try
             {
                 _logger.LogInformation("Obtener número de villas");
-                IEnumerable<NumeroVilla> numeroVillaList = await _numeroRepo.ObtenerTodos();
+                IEnumerable<NumeroVilla> numeroVillaList = await _numeroRepo.ObtenerTodos(incluirPropiedades: "Villa");
                 _response.Resultado = _mapper.Map<IEnumerable<NumeroVillaDto>>(numeroVillaList);
                 _response.statusCode = HttpStatusCode.OK;
 
@@ -67,7 +67,7 @@ namespace API_King.Controllers
                 }
 
                 //var villa = VillaStore.villaList.FirstOrDefault(v => v.Id == id);
-                var numeroVilla = await _numeroRepo.Obtener(v => v.VillaNo == id);
+                var numeroVilla = await _numeroRepo.Obtener(v => v.VillaNo == id, incluirPropiedades: "Villa");
 
                 if (numeroVilla == null)
                 {

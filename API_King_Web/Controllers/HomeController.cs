@@ -1,8 +1,11 @@
-﻿using API_King_Web.Models;
+﻿using API_King.Modelos;
+using API_King_Web.Models;
+using API_King_Web.Models.Dto;
 using API_King_Web.Services;
 using API_King_Web.Services.IServices;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Diagnostics;
 
 
@@ -21,9 +24,17 @@ namespace API_King_Web.Controllers
             _mapper = mapper;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            List<VillaDto> villaList = new();
+            var response = await _villaService.ObtenerTodos<APIResponse>();
+
+            if (response != null && response.IsExitoso)
+            {
+                villaList = JsonConvert.DeserializeObject<List<VillaDto>>(Convert.ToString(response.Resultado));
+            }
+
+            return View(villaList);
         }
 
         public IActionResult Privacy()

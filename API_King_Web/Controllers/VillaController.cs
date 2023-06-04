@@ -46,6 +46,7 @@ namespace API_King_Web.Controllers
 
                 if (response != null && response.IsExitoso)
                 {
+                    TempData["exitoso"] = "Villa Creada Exitosamente";
                     return RedirectToAction(nameof(IndexVilla));
                 }
             }
@@ -76,6 +77,7 @@ namespace API_King_Web.Controllers
 
                 if (Response != null && response.IsExitoso)
                 {
+                    TempData["exitoso"] = "Villa Actualizada Exitosamente";
                     return RedirectToAction(nameof(IndexVilla));
                 }
             }
@@ -105,9 +107,11 @@ namespace API_King_Web.Controllers
 
             if (Response != null && response.IsExitoso)
             {
+                TempData["exitoso"] = "Villa eliminada Exitosamente";
                 return RedirectToAction(nameof(IndexVilla));
             }
 
+            TempData["error"] = "Ocurrio en un error al Eliminar";
             return View(modelo);
 
         }

@@ -104,7 +104,7 @@ namespace API_King.Controllers
                 //validar si los nombres ya existen
                 if (await _villaRepo.Obtener(v => v.Nombre.ToLower() == createDto.Nombre.ToLower()) != null)
                 {
-                    ModelState.AddModelError("NombreExiste", "La villa con ese nombre ya existe");
+                    ModelState.AddModelError("ErrorMessages", "La villa con ese nombre ya existe");
                     return BadRequest(ModelState);
                 }
 
