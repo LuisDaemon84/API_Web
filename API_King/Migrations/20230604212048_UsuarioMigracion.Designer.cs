@@ -4,6 +4,7 @@ using API_King.Datos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API_King.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230604212048_UsuarioMigracion")]
+    partial class UsuarioMigracion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,31 +47,6 @@ namespace API_King.Migrations
                     b.HasIndex("VillaId");
 
                     b.ToTable("NumeroVillas");
-                });
-
-            modelBuilder.Entity("API_King.Modelos.Usuario", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Nombres")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Rol")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Usuarios");
                 });
 
             modelBuilder.Entity("API_King.Modelos.Villa", b =>
@@ -117,8 +95,8 @@ namespace API_King.Migrations
                             Id = 1,
                             Amenidad = "",
                             Detalle = "Detalle de la villa",
-                            FechaActualizacion = new DateTime(2023, 6, 4, 16, 26, 20, 160, DateTimeKind.Local).AddTicks(4153),
-                            FechaCreacion = new DateTime(2023, 6, 4, 16, 26, 20, 160, DateTimeKind.Local).AddTicks(4123),
+                            FechaActualizacion = new DateTime(2023, 6, 4, 16, 20, 47, 775, DateTimeKind.Local).AddTicks(430),
+                            FechaCreacion = new DateTime(2023, 6, 4, 16, 20, 47, 775, DateTimeKind.Local).AddTicks(396),
                             ImagenUrl = "",
                             MetrosCuadrados = 50,
                             Nombre = "Villa Real",
@@ -130,8 +108,8 @@ namespace API_King.Migrations
                             Id = 2,
                             Amenidad = "",
                             Detalle = "Villa Premiun",
-                            FechaActualizacion = new DateTime(2023, 6, 4, 16, 26, 20, 160, DateTimeKind.Local).AddTicks(4246),
-                            FechaCreacion = new DateTime(2023, 6, 4, 16, 26, 20, 160, DateTimeKind.Local).AddTicks(4236),
+                            FechaActualizacion = new DateTime(2023, 6, 4, 16, 20, 47, 775, DateTimeKind.Local).AddTicks(450),
+                            FechaCreacion = new DateTime(2023, 6, 4, 16, 20, 47, 775, DateTimeKind.Local).AddTicks(440),
                             ImagenUrl = "",
                             MetrosCuadrados = 60,
                             Nombre = "Villa Live",

@@ -2,6 +2,7 @@
 using API_King.Modelos.Dto;
 using API_King.Repositorio.IRepositorio;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -26,6 +27,7 @@ namespace API_King.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponse>> GetVillas()
         {
@@ -45,10 +47,11 @@ namespace API_King.Controllers
             }
 
             return _response;
-            
+
         }
 
         [HttpGet("{id:int}", Name = "GetVilla")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -81,13 +84,14 @@ namespace API_King.Controllers
             catch (Exception ex)
             {
                 _response.IsExitoso = false;
-                _response.ErrorMessages = new List<string>() { ex.ToString() };                
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
             }
 
-            return _response;            
+            return _response;
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -124,13 +128,14 @@ namespace API_King.Controllers
             catch (Exception ex)
             {
                 _response.IsExitoso = false;
-                _response.ErrorMessages = new List<string>() {ex.ToString() };
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
             }
 
             return _response;
-        }  
+        }
 
         [HttpDelete("{id:int}")]
+        [Authorize (Roles ="admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -169,6 +174,7 @@ namespace API_King.Controllers
         }
 
         [HttpPut("{id:int}")]
+        [Authorize (Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -188,6 +194,7 @@ namespace API_King.Controllers
         }
 
         [HttpPatch("{id:int}")]
+        [Authorize (Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
 

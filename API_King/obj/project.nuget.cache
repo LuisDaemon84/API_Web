@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Jwu/LXHF8yYmwBLt7Ecg0dg2XtGcgsm81bTFFGKyUaWcfZ4R0PlErWFOSFOrsAmMGBGJF4c70Z4edluIn2rQ+Q==",
+  "dgSpecHash": "ye/6sjiSyv20h4eQi7aDx/lsKCqrAg2lkOgrk8PnAkrx+G8YktWxClvRAKgT6HzDh2elaYMUmBS+Xbf4OLYZ7g==",
   "success": true,
   "projectFilePath": "C:\\Users\\King\\Desktop\\Development\\Projects .Net\\Projet6-Udemy\\API\\API_King\\API_King.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,7 @@
     "C:\\Users\\King\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\King\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
     "C:\\Users\\King\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\King\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.5\\microsoft.aspnetcore.authentication.jwtbearer.7.0.5.nupkg.sha512",
     "C:\\Users\\King\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\7.0.5\\microsoft.aspnetcore.jsonpatch.7.0.5.nupkg.sha512",
     "C:\\Users\\King\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\7.0.5\\microsoft.aspnetcore.mvc.newtonsoftjson.7.0.5.nupkg.sha512",
     "C:\\Users\\King\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.5\\microsoft.aspnetcore.openapi.7.0.5.nupkg.sha512",
