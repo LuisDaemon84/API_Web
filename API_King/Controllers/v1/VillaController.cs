@@ -1,5 +1,6 @@
 ﻿using API_King.Modelos;
 using API_King.Modelos.Dto;
+using API_King.Modelos.Especificaciones;
 using API_King.Repositorio.IRepositorio;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -28,6 +29,7 @@ namespace API_King.Controllers.v1
         }
 
         [HttpGet]
+        [ResponseCache(CacheProfileName = "Default30")]
         [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponse>> GetVillas()
@@ -48,8 +50,32 @@ namespace API_King.Controllers.v1
             }
 
             return _response;
-
         }
+
+        [HttpGet("VillasPaginado")]
+        [ResponseCache(CacheProfileName = "Default30")]        
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public ActionResult<APIResponse> GetVillasPaginado([FromQuery] Parametros parametros)
+
+        {
+            try
+            {
+                var villaList = _villaRepo.ObtenerTodosPaginado(parametros);
+                _response.Resultado = _mapper.Map<IEnumerable<VillaDto>>(villaList);
+                _response.statusCode = HttpStatusCode.OK;
+                _response.TotalPaginas = villaList.MetaData.TotalPages;
+
+                return Ok(_response);
+            }
+            catch (Exception ex)
+            {
+                _response.IsExitoso = false;
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
+            }
+
+            return _response;
+        }
+
 
         [HttpGet("{id:int}", Name = "GetVilla")]
         [Authorize]

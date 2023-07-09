@@ -1,4 +1,5 @@
 ﻿using API_King.Datos;
+using API_King.Modelos.Especificaciones;
 using API_King.Repositorio.IRepositorio;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
@@ -70,6 +71,26 @@ namespace API_King.Repositorio
             }
 
             return await query.ToListAsync();
+        }
+
+        public PagedList<T> ObtenerTodosPaginado(Parametros parametros, Expression<Func<T, bool>>? filtro = null, string? incluirPropiedades = null)
+        {
+            IQueryable<T> query = dbSet;
+
+            if (filtro != null)
+            {
+                query = query.Where(filtro);
+            }
+
+            if (incluirPropiedades != null) // "Villa, OtroModelo"
+            {
+                foreach (var incluirProp in incluirPropiedades.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(incluirProp);
+                }
+            }
+
+            return PagedList<T>.ToPagedList(query, parametros.PageNumber, parametros.PageSize);
         }
 
         public async Task Remover(T entidad)
