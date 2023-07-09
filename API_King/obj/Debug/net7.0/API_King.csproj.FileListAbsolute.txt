@@ -81,3 +81,5 @@ C:\Users\King\Desktop\Development\Projects .Net\Projet6-Udemy\API\API_King\obj\D
 C:\Users\King\Desktop\Development\Projects .Net\Projet6-Udemy\API\API_King\obj\Debug\net7.0\API_King.pdb
 C:\Users\King\Desktop\Development\Projects .Net\Projet6-Udemy\API\API_King\obj\Debug\net7.0\API_King.genruntimeconfig.cache
 C:\Users\King\Desktop\Development\Projects .Net\Projet6-Udemy\API\API_King\obj\Debug\net7.0\ref\API_King.dll
+C:\Users\King\Desktop\Development\Projects .Net\Projet6-Udemy\API\API_King\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc.Versioning.dll
+C:\Users\King\Desktop\Development\Projects .Net\Projet6-Udemy\API\API_King\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer.dll

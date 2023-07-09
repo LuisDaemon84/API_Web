@@ -6,10 +6,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
-namespace API_King.Controllers
+namespace API_King.Controllers.v1
 {
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
+    [ApiVersion("1.0")]    
     public class NumeroVillaController : ControllerBase
     {
         private readonly ILogger<NumeroVillaController> _logger;
@@ -18,7 +19,7 @@ namespace API_King.Controllers
         private readonly IMapper _mapper;
         protected APIResponse _response;
 
-        public NumeroVillaController(ILogger<NumeroVillaController> logger, IVillaRepositorio villaRepo, 
+        public NumeroVillaController(ILogger<NumeroVillaController> logger, IVillaRepositorio villaRepo,
                                                                             INumeroVillaRepositorio numeroRepo, IMapper mapper)
         {
             _logger = logger;
@@ -27,7 +28,7 @@ namespace API_King.Controllers
             _mapper = mapper;
             _response = new();
         }
-
+                
         [HttpGet]
         [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -49,9 +50,9 @@ namespace API_King.Controllers
             }
 
             return _response;
-            
-        }
 
+        }
+        
         [HttpGet("{id:int}", Name = "GetNumeroVilla")]
         [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -86,10 +87,10 @@ namespace API_King.Controllers
             catch (Exception ex)
             {
                 _response.IsExitoso = false;
-                _response.ErrorMessages = new List<string>() { ex.ToString() };                
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
             }
 
-            return _response;            
+            return _response;
         }
 
         [HttpPost]
@@ -114,7 +115,7 @@ namespace API_King.Controllers
                     return BadRequest(ModelState);
                 }
 
-                if(await _villaRepo.Obtener(v=> v.Id==createDto.VillaId) ==null)
+                if (await _villaRepo.Obtener(v => v.Id == createDto.VillaId) == null)
                 {
                     ModelState.AddModelError("ErrorMessages", "El Id de la villa no existe");
                     return BadRequest(ModelState);
@@ -136,11 +137,11 @@ namespace API_King.Controllers
             catch (Exception ex)
             {
                 _response.IsExitoso = false;
-                _response.ErrorMessages = new List<string>() {ex.ToString() };
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
             }
 
             return _response;
-        }  
+        }
 
         [HttpDelete("{id:int}")]
         [Authorize]
@@ -188,24 +189,24 @@ namespace API_King.Controllers
 
         public async Task<IActionResult> UpdateNumeroVilla(int id, [FromBody] NumeroVillaUpdateDto updateDto)
         {
-            if (updateDto == null || id!= updateDto.VillaNo)
+            if (updateDto == null || id != updateDto.VillaNo)
             {
                 _response.IsExitoso = false;
                 _response.statusCode = HttpStatusCode.BadRequest;
                 return BadRequest(_response);
             }
-            
-            if(await _villaRepo.Obtener(V=> V.Id == updateDto.VillaId) == null)
+
+            if (await _villaRepo.Obtener(V => V.Id == updateDto.VillaId) == null)
             {
                 ModelState.AddModelError("ErrorMessages", "El Id de la villa no existe");
                 return BadRequest(ModelState);
             }
 
-            NumeroVilla modelo = _mapper.Map<NumeroVilla>(updateDto);            
+            NumeroVilla modelo = _mapper.Map<NumeroVilla>(updateDto);
             await _numeroRepo.Actualizar(modelo);
             _response.statusCode = HttpStatusCode.NoContent;
             return Ok(_response);
-        }       
+        }
 
     }
 }

@@ -7,10 +7,11 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
-namespace API_King.Controllers
+namespace API_King.Controllers.v1
 {
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
+    [ApiVersion("1.0")]
     public class VillaController : ControllerBase
     {
         private readonly ILogger<VillaController> _logger;
@@ -135,7 +136,7 @@ namespace API_King.Controllers
         }
 
         [HttpDelete("{id:int}")]
-        [Authorize (Roles ="admin")]
+        [Authorize(Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -174,7 +175,7 @@ namespace API_King.Controllers
         }
 
         [HttpPut("{id:int}")]
-        [Authorize (Roles = "admin")]
+        [Authorize(Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -186,15 +187,15 @@ namespace API_King.Controllers
                 _response.statusCode = HttpStatusCode.BadRequest;
                 return BadRequest(_response);
             }
-            
-            Villa modelo = _mapper.Map<Villa>(updateDto);            
+
+            Villa modelo = _mapper.Map<Villa>(updateDto);
             await _villaRepo.Actualizar(modelo);
             _response.statusCode = HttpStatusCode.NoContent;
             return Ok(_response);
         }
 
         [HttpPatch("{id:int}")]
-        [Authorize (Roles = "admin")]
+        [Authorize(Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -205,9 +206,9 @@ namespace API_King.Controllers
                 return BadRequest();
             }
 
-            var villa = await _villaRepo.Obtener(v => v.Id == id, tracked:false);
+            var villa = await _villaRepo.Obtener(v => v.Id == id, tracked: false);
             VillaUpdateDto villaDto = _mapper.Map<VillaUpdateDto>(villa);
-              
+
             if (villa == null)
                 return BadRequest();
 
@@ -218,7 +219,7 @@ namespace API_King.Controllers
                 return BadRequest(ModelState);
             }
 
-            Villa modelo = _mapper.Map<Villa>(villaDto);            
+            Villa modelo = _mapper.Map<Villa>(villaDto);
             await _villaRepo.Actualizar(modelo);
             _response.statusCode = HttpStatusCode.NoContent;
             return Ok(_response);
