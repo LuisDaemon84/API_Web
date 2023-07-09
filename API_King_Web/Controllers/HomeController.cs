@@ -1,7 +1,7 @@
 ﻿using API_King.Modelos;
+using API_King_Utilidad;
 using API_King_Web.Models;
 using API_King_Web.Models.Dto;
-using API_King_Web.Services;
 using API_King_Web.Services.IServices;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +27,7 @@ namespace API_King_Web.Controllers
         public async Task<IActionResult> Index()
         {
             List<VillaDto> villaList = new();
-            var response = await _villaService.ObtenerTodos<APIResponse>();
+            var response = await _villaService.ObtenerTodos<APIResponse>(HttpContext.Session.GetString(DS.SessionToken));
 
             if (response != null && response.IsExitoso)
             {

@@ -10,6 +10,7 @@ C:\Users\King\Desktop\Development\Projects .Net\Projet6-Udemy\API\API_King\bin\D
 C:\Users\King\Desktop\Development\Projects .Net\Projet6-Udemy\API\API_King\bin\Debug\net7.0\Azure.Core.dll
 C:\Users\King\Desktop\Development\Projects .Net\Projet6-Udemy\API\API_King\bin\Debug\net7.0\Azure.Identity.dll
 C:\Users\King\Desktop\Development\Projects .Net\Projet6-Udemy\API\API_King\bin\Debug\net7.0\Humanizer.dll
+C:\Users\King\Desktop\Development\Projects .Net\Projet6-Udemy\API\API_King\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\King\Desktop\Development\Projects .Net\Projet6-Udemy\API\API_King\bin\Debug\net7.0\Microsoft.AspNetCore.JsonPatch.dll
 C:\Users\King\Desktop\Development\Projects .Net\Projet6-Udemy\API\API_King\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\King\Desktop\Development\Projects .Net\Projet6-Udemy\API\API_King\bin\Debug\net7.0\Microsoft.AspNetCore.OpenApi.dll
@@ -80,4 +81,3 @@ C:\Users\King\Desktop\Development\Projects .Net\Projet6-Udemy\API\API_King\obj\D
 C:\Users\King\Desktop\Development\Projects .Net\Projet6-Udemy\API\API_King\obj\Debug\net7.0\API_King.pdb
 C:\Users\King\Desktop\Development\Projects .Net\Projet6-Udemy\API\API_King\obj\Debug\net7.0\API_King.genruntimeconfig.cache
 C:\Users\King\Desktop\Development\Projects .Net\Projet6-Udemy\API\API_King\obj\Debug\net7.0\ref\API_King.dll
-C:\Users\King\Desktop\Development\Projects .Net\Projet6-Udemy\API\API_King\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

@@ -1,9 +1,12 @@
 ﻿using API_King.Modelos;
+using API_King_Utilidad;
 using API_King_Web.Models.Dto;
 using API_King_Web.Services.IServices;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Data;
 
 namespace API_King_Web.Controllers
 {
@@ -19,7 +22,7 @@ namespace API_King_Web.Controllers
         public async Task<IActionResult> IndexVilla()
         {
             List<VillaDto> villaList = new();
-            var response = await _villaService.ObtenerTodos<APIResponse>();
+            var response = await _villaService.ObtenerTodos<APIResponse>(HttpContext.Session.GetString(DS.SessionToken));
 
             if (response != null && response.IsExitoso)
             {
@@ -42,7 +45,7 @@ namespace API_King_Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = await _villaService.Crear<APIResponse>(modelo);
+                var response = await _villaService.Crear<APIResponse>(modelo, HttpContext.Session.GetString(DS.SessionToken));
 
                 if (response != null && response.IsExitoso)
                 {
@@ -56,7 +59,7 @@ namespace API_King_Web.Controllers
 
         public async Task<IActionResult> ActualizarVilla(int villaId)
         {
-            var response = await _villaService.Obtener<APIResponse>(villaId);
+            var response = await _villaService.Obtener<APIResponse>(villaId, HttpContext.Session.GetString(DS.SessionToken));
 
             if (response != null && response.IsExitoso)
             {
@@ -73,7 +76,7 @@ namespace API_King_Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = await _villaService.Actualizar<APIResponse>(modelo);
+                var response = await _villaService.Actualizar<APIResponse>(modelo, HttpContext.Session.GetString(DS.SessionToken));
 
                 if (Response != null && response.IsExitoso)
                 {
@@ -88,7 +91,7 @@ namespace API_King_Web.Controllers
 
         public async Task<IActionResult> RemoverVilla(int villaId)
         {
-            var response = await _villaService.Obtener<APIResponse>(villaId);
+            var response = await _villaService.Obtener<APIResponse>(villaId, HttpContext.Session.GetString(DS.SessionToken));
 
             if (response != null && response.IsExitoso)
             {
@@ -103,7 +106,7 @@ namespace API_King_Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RemoverVilla(VillaDto modelo)
         {
-            var response = await _villaService.Remover<APIResponse>(modelo.Id);
+            var response = await _villaService.Remover<APIResponse>(modelo.Id, HttpContext.Session.GetString(DS.SessionToken));
 
             if (Response != null && response.IsExitoso)
             {

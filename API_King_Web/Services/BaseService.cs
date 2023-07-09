@@ -4,6 +4,7 @@ using API_King_Web.Models;
 using API_King_Web.Services.IServices;
 using Newtonsoft.Json;
 using System.Net;
+using System.Net.Http.Headers;
 using System.Text;
 
 
@@ -54,6 +55,12 @@ namespace API_King_Web.Services
                 }
 
                 HttpResponseMessage apiResponse = null;
+
+                if (!string.IsNullOrEmpty(apiRequest.Token))
+                {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiRequest.Token);
+                }
+
                 apiResponse = await client.SendAsync(message);
                 var apiContent = await apiResponse.Content.ReadAsStringAsync();
 
@@ -61,7 +68,8 @@ namespace API_King_Web.Services
                 {
                     APIResponse response = JsonConvert.DeserializeObject<APIResponse>(apiContent);
 
-                    if (apiResponse.StatusCode == HttpStatusCode.BadRequest || apiResponse.StatusCode == HttpStatusCode.NotFound)
+                    if (response != null && (apiResponse.StatusCode == HttpStatusCode.BadRequest
+                                        || apiResponse.StatusCode == HttpStatusCode.NotFound))
                     {
                         response.statusCode = HttpStatusCode.BadRequest;
                         response.IsExitoso = false;
@@ -71,16 +79,16 @@ namespace API_King_Web.Services
                         return obj;
                     }
 
-                    var APIResponse = JsonConvert.DeserializeObject<T>(apiContent);
-                    return APIResponse;
-
                 }
                 catch (Exception ex)
                 {
                     var errorResponse = JsonConvert.DeserializeObject<T>(apiContent);
                     return errorResponse;
                 }
-              
+
+                var APIResponse = JsonConvert.DeserializeObject<T>(apiContent);
+                return APIResponse;
+
             }
             catch (Exception ex)
             {
