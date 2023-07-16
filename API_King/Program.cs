@@ -1,8 +1,10 @@
 using API_King;
 using API_King.Datos;
+using API_King.Modelos;
 using API_King.Repositorio;
 using API_King.Repositorio.IRepositorio;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -13,9 +15,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers(options =>
+builder.Services.AddControllers(option =>
 {
-    options.CacheProfiles.Add("Default30",
+    option.CacheProfiles.Add("Default30",
         new CacheProfile()
         {
             Duration = 30
@@ -90,10 +92,14 @@ builder.Services.AddAuthentication(x =>
         };
     });
 
+
 builder.Services.AddDbContext<ApplicationDbContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+builder.Services.AddIdentity<UsuarioAplicacion, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddAutoMapper(typeof(MappingConfig));
 

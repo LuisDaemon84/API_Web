@@ -25,6 +25,8 @@ namespace API_King_Web.Controllers
             _villaService = villaService;
             _mapper = mapper;
         }
+
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> IndexNumeroVilla()
         {
             List<NumeroVillaDto> numeroVillaList = new();
@@ -38,6 +40,7 @@ namespace API_King_Web.Controllers
             return View(numeroVillaList);
         }
 
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> CrearNumeroVilla()
         {
             NumeroVillaViewModel numeroVillaVM = new();
@@ -97,6 +100,7 @@ namespace API_King_Web.Controllers
 
         }
 
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> ActualizarNumeroVilla(int villaNo)
         {
             NumeroVillaUpdateViewModel numeroVillaVM = new();
@@ -165,6 +169,7 @@ namespace API_King_Web.Controllers
             return View(modelo);
         }
 
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> RemoverNumeroVilla(int villaNo)
         {
             NumeroVillaDeleteViewModel numeroVillaVM = new();

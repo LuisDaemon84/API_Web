@@ -8,6 +8,6 @@ namespace API_King.Repositorio.IRepositorio
     {
         bool IsUsuarioUnico(string userName);
         Task<LoginResponseDTO> Login(LoginRequestDTO loginResquestDTO);
-        Task<Usuario> Registrar(RegistroRequestDTO registroRequestDTO);
+        Task<UsuarioDto> Registrar(RegistroRequestDTO registroRequestDTO);
     }
 }

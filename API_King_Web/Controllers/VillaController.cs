@@ -19,6 +19,8 @@ namespace API_King_Web.Controllers
             _villaService = villaService;
             _mapper = mapper;
         }
+
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> IndexVilla()
         {
             List<VillaDto> villaList = new();
@@ -34,6 +36,7 @@ namespace API_King_Web.Controllers
         }
 
         //Metodo Get 
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> CrearVilla()
         {
             return View();
@@ -57,6 +60,7 @@ namespace API_King_Web.Controllers
             return View(modelo);
         }
 
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> ActualizarVilla(int villaId)
         {
             var response = await _villaService.Obtener<APIResponse>(villaId, HttpContext.Session.GetString(DS.SessionToken));
@@ -89,6 +93,7 @@ namespace API_King_Web.Controllers
 
         }
 
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> RemoverVilla(int villaId)
         {
             var response = await _villaService.Obtener<APIResponse>(villaId, HttpContext.Session.GetString(DS.SessionToken));
